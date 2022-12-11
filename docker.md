@@ -38,6 +38,25 @@ docker支持多种操作系统的安装，以下我只简单介绍关于linux和
 
 `curl -sSL https://get.daocloud.io/docker | sh`
 
+当执行安装命令出现以下情况报错的时候
+
+```
+# Executing docker install script, commit: 4f282167c425347a931ccfd95cc91fab041d414f
++ sh -c 'yum install -y -q yum-utils'
+error: rpmdb: BDB0113 Thread/process 16675/139942115395648 failed: BDB1507 Thread died in Berkeley DB library
+error: db5 error(-30973) from dbenv->failchk: BDB0087 DB_RUNRECOVERY: Fatal error, run database recovery
+error: cannot open Packages index using db5 -  (-30973)
+error: cannot open Packages database in /var/lib/rpm
+CRITICAL:yum.main:
+
+Error: rpmdb open failed
+
+```
+
+执行 `mv /var/lib/rpm/__db.00* /tmp/&&yum clean all`
+
+再执行安装命令就可以了
+
 这样在有网的机器上就安装完成了，是不是很简单 ，
 
 接下来我们要说手动安装的情况
@@ -183,7 +202,6 @@ docker run : 原本的意义是创建一个docker容器，并运行它
 --volume , -v: 绑定一个卷
 ```
 
-
 **docker start** :启动一个或多个已经被停止的容器
 
 **docker stop** :停止一个运行中的容器
@@ -206,7 +224,6 @@ docker run : 原本的意义是创建一个docker容器，并运行它
 
 * 命令可以嵌套使用如下 ：
   * `删除所有已经停止的容器：docker rm $(docker ps -a -q)`
-
 
 **docker pause** :暂停容器中所有的进程。
 

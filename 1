@@ -1,0 +1,124 @@
+ALTER TABLE ods_spu_info SET TBLPROPERTIES ("EXTERNAL" = "false");
+
+--sqlPath E:\rpt_log.sql
+ set spark.sql.codegen.wholeStage=false;
+
+ bin/maxwell --user='maxwell' --password='maxwell' --host='bigdata2' --producer=stdout
+ bin/maxwell --config ./config.properties
+
+
+ kafka-topics.sh \
+--create \
+--zookeeper bigdata3:2181,bigdata4:2181,bigdata5:2181/kafka \
+--topic topic_log \
+--partitions 6 \
+--replication-factor 3
+
+make PREFIX=/root/redis/redis-5.0.14 install
+
+kafka-console-consumer.sh \
+--bootstrap-server bigdata3:9092,bigdata4:9092,bigdata5:9092 \
+--topic dwd_interaction_favor_add \
+--from-beginning 
+
+GRANT ALL ON maxwell.* TO 'maxwell'@'%' IDENTIFIED BY '123456';
+
+bigdata2 redis maxwell mysqlbinlog
+bigdata3 rizhi1 flume
+bigdata4 hbase phoenix
+bigdata5 附属
+
+ flume.sh \
+ --Source taildir \
+ --Channel memory \
+ --capacity 10000 \
+ --transactionCapacity 10000 \
+ --Sink kafka \
+ --topicSink topic_log \
+ --filename test \
+ --interceptors flume.flumeinter'$'Builder \
+ --filegroups f1 \
+ --filepathtaildir /home/hadoop/project/mnilog/10.mock/rizhi/log/app.2023-06-04.log \
+ --classpath /home/hadoop/project/jar/flumeinter.jar
+ 
+ 
+ kafka-console-consumer.sh \
+ --bootstrap-server bigdata3:9092,bigdata4:9092,bigdata5:9092 \
+ --topic dwd_trade_cart_add \
+ --from-beginning 
+
+
+
+action_info
+bll_re02
+bll_re03
+display_info
+dwd_action_log
+dwd_dim_activity_info
+dwd_dim_base_province
+dwd_dim_coupon_info
+dwd_dim_sku_info
+dwd_dim_user_info_his
+dwd_dim_userinfo
+dwd_display_log
+dwd_error_log
+dwd_fact_cart_info
+dwd_fact_comment_info
+dwd_fact_coupon_use
+dwd_fact_favor_info
+dwd_fact_order_detail
+dwd_fact_order_info
+dwd_fact_order_refund_info
+dwd_fact_pay_info
+dwd_fact_payment_info
+dwd_page_log
+dwd_start_log
+dwd_user_start_log_d
+dwd_warehouse_new_user_d
+dwm_warehouse_bill_d
+dws_user_start_log_detail
+dws_warehouse_bill_d
+dws_warehouse_log_d
+dws_warehouse_order_log_d
+erro_info
+etl_log_info
+favor_info
+log_info
+log_test
+ods_activity_info
+ods_activity_order
+ods_activity_rule
+ods_base_category1
+ods_base_category2
+ods_base_category3
+ods_base_dic
+ods_base_province
+ods_base_region
+ods_base_trademark
+ods_cart_info
+ods_comment_info
+ods_coupon_info
+ods_coupon_use
+ods_favor_info
+ods_order_detail
+ods_order_info
+ods_order_refund_info
+ods_order_status_log
+ods_payment_info
+ods_sku_info
+ods_spu_info
+ods_user_info
+order_info
+action_info
+page_info
+retent_01
+retent_01_new
+rpt_log_detail
+rpt_order_detail
+rpt_order_log_deatail
+rpt_user_start_log_detail
+rpt_user_start_retain_last3d
+tmp
+tmp2
+user_info
+user_retent_01
